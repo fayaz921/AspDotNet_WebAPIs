@@ -1,6 +1,9 @@
-﻿namespace AspDotNetCore_WebAPIs.Repositories.Interfaces
+﻿using AspDotNetCore_WebAPIs.Data.Entities;
+
+namespace AspDotNetCore_WebAPIs.Repositories.Interfaces
 {
-    public class IUserRepo
+    public interface IUserRepo
     {
+        Task<User> RegisterAsync(User user);
     }
 }

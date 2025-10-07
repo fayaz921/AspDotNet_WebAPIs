@@ -1,5 +1,5 @@
 ﻿using AspDotNetCore_WebAPIs.Data.Entities;
-using AspDotNetCore_WebAPIs.Dtos;
+using AspDotNetCore_WebAPIs.Dtos.Users;
 
 namespace AspDotNetCore_WebAPIs.Extentions.Mappers
 {

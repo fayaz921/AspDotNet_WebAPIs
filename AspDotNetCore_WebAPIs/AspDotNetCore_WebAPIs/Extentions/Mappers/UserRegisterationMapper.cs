@@ -1,11 +1,11 @@
 ﻿using AspDotNetCore_WebAPIs.Data.Entities;
-using AspDotNetCore_WebAPIs.Dtos.Users;
+using AspDotNetCore_WebAPIs.Dtos.Authentication;
 
 namespace AspDotNetCore_WebAPIs.Extentions.Mappers
 {
-    public static class AddUserMapper
+    public static class UserRegisterationMapper
     {
-        public static User Map(this AddUserDto dto)
+        public static User Map(this UserRegisterDto dto)
         {
             return new User
             {
@@ -13,10 +13,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                ImageUrl = dto.ImageUrl,
-                Contact = dto.Contact,
-                Role = dto.Role,
-
+      
             };
         }
     }

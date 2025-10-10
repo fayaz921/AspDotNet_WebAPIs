@@ -9,6 +9,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.RepoConfigration
     {
         public static IServiceCollection AddRepoConfigration(this IServiceCollection services, IConfiguration configuration)
             => services.AddScoped<IUserRepo, UserRepo>()
+            .AddScoped<IAuthenticationRepo, AuthenticationRepo>()
             .AddDbContext<AppDBContext>(options => options.UseSqlServer(configuration.GetConnectionString("MyConn")));
 
     }

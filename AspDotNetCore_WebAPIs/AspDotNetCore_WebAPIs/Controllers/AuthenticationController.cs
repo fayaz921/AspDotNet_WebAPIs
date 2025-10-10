@@ -7,22 +7,24 @@ namespace AspDotNetCore_WebAPIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IUserService userService;
-        public AuthenticationController(IUserService _userService)
+        private readonly IAuthenticationService authenticationService;
+        public AuthenticationController(IAuthenticationService _authenticationService)
         {
-            userService = _userService;
+            authenticationService = _authenticationService;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
-            var user = await userService.RegisterAsync(userRegisterDto);
-            if (user == null)
+           var response = await authenticationService.RegisterAsync(userRegisterDto);
+            if(response == null)
             {
-                return BadRequest("User Email Already Exist.");
+                return Conflict("Registration failed");
             }
-            return Ok(user);
+            return Ok(response);
         }
     }
 }

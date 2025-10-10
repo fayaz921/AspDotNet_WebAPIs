@@ -1,5 +1,6 @@
 ﻿using AspDotNetCore_WebAPIs.Data.Entities;
 using AspDotNetCore_WebAPIs.Dtos.Authentication;
+using AspDotNetCore_WebAPIs.Shared;
 
 namespace AspDotNetCore_WebAPIs.Extentions.Mappers
 {
@@ -7,6 +8,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
     {
         public static User Map(this UserRegisterDto dto)
         {
+            PasswordEncryptor.CreatePasswordHashandSalt(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
             return new User
             {
                 UserId = Guid.NewGuid(),
@@ -14,7 +16,9 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
                 LastName = dto.LastName,
                 Email = dto.Email,
                 Contact = dto.Contact,
-                UserName = dto.UserName
+                UserName = dto.UserName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
 
             };
         }

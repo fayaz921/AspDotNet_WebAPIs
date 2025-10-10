@@ -7,7 +7,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
     {
         public static GetUserDto Map(this User user)
         {
-            return new GetUserDto(user.UserId,user.FirstName,user.LastName,user.Email,user.Contact,user.Role,user.ImageUrl!);
+            return new GetUserDto(user.UserId,user.FirstName,user.LastName,user.Email,user.Contact,user.Role,user.ImageUrl!,user.UserName);
         }
     }
 }

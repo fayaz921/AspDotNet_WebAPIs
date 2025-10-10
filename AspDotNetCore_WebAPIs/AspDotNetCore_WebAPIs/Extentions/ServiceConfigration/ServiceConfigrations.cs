@@ -8,7 +8,8 @@ namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
         public static IServiceCollection AddServiceConfigration(this IServiceCollection services)
             => services.AddScoped<IUserService, UserService>()
             .AddEndpointsApiExplorer()
-            .AddSwaggerGen();
+            .AddSwaggerGen()
+            .AddScoped<IAuthenticationService, AuthenticationService>();
 
     }
 }

@@ -13,7 +13,9 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-      
+                Contact = dto.Contact,
+                UserName = dto.UserName
+
             };
         }
     }

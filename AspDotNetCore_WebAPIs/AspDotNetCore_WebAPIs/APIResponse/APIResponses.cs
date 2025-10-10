@@ -4,7 +4,7 @@
     {
         public T? Data { get; set; }
         public bool IsSuccess { get; set; }
-        public T? Error { get; set; }
+        public string? Error { get; set; }
 
         public static APIResponses<T> SuccessResponse(T? data)
         {
@@ -15,7 +15,7 @@
             };
         }
 
-        public static APIResponses<T> FailureResponse(T? error)
+        public static APIResponses<T> FailureResponse(string? error)
         {
             return new APIResponses<T>
             {

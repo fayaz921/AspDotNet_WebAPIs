@@ -26,5 +26,12 @@ namespace AspDotNetCore_WebAPIs.Controllers
             }
             return Ok(response);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        {
+            var response = await authenticationService.LoginAsync(userLoginDto);
+            return response.Data is null ? Unauthorized(response) : Ok(response);
+        }
     }
 }

@@ -4,6 +4,7 @@ using AspDotNetCore_WebAPIs.Dtos.Users;
 using AspDotNetCore_WebAPIs.Extentions.Mappers;
 using AspDotNetCore_WebAPIs.Repositories.Interfaces;
 using AspDotNetCore_WebAPIs.Services.Interfaces;
+using AspDotNetCore_WebAPIs.Shared;
 
 namespace AspDotNetCore_WebAPIs.Services.Implementation
 {
@@ -14,6 +15,23 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
         {
             authenticationRepo = repo;
         }
+
+        public async Task<APIResponses<string>> LoginAsync(UserLoginDto userLogin)
+        {
+            var user = userLogin.Map();
+            var isexists =await authenticationRepo.LoginAsync(user);
+            if(isexists is null)
+            {
+                return APIResponses<string>.FailureResponse("Invalid login credentials");
+            }
+            if(!PasswordEncryptor.VerifyPasswordhashandsalt(userLogin.Password,isexists.PasswordHash,isexists.PasswordSalt))
+            {
+                return APIResponses<string>.FailureResponse("Invalid login creadentials");
+            }
+
+            return APIResponses<string>.SuccessResponse("Login Successful");    
+        }
+
         public async Task<APIResponses<GetUserDto>> RegisterAsync(UserRegisterDto userRegister)
         {
             //Map from dto to user

@@ -8,6 +8,6 @@ namespace AspDotNetCore_WebAPIs.Services.Interfaces
     public interface IAuthenticationService
     {
         Task<APIResponses<GetUserDto>> RegisterAsync(UserRegisterDto userRegister);
-      
+        Task<APIResponses<string>> LoginAsync(UserLoginDto userLogin);
     }
 }

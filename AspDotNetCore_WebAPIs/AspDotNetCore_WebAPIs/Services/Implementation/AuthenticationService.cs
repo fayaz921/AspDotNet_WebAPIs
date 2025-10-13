@@ -5,15 +5,18 @@ using AspDotNetCore_WebAPIs.Extentions.Mappers;
 using AspDotNetCore_WebAPIs.Repositories.Interfaces;
 using AspDotNetCore_WebAPIs.Services.Interfaces;
 using AspDotNetCore_WebAPIs.Shared;
+using AspDotNetCore_WebAPIs.Utilities;
 
 namespace AspDotNetCore_WebAPIs.Services.Implementation
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IAuthenticationRepo authenticationRepo;
-        public AuthenticationService(IAuthenticationRepo repo)
+        private readonly IJWTTokenService jWTTokenService;
+        public AuthenticationService(IAuthenticationRepo repo, IJWTTokenService jWTToken)
         {
             authenticationRepo = repo;
+            jWTTokenService = jWTToken;
         }
 
         public async Task<APIResponses<string>> LoginAsync(UserLoginDto userLogin)
@@ -29,7 +32,7 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
                 return APIResponses<string>.FailureResponse("Invalid login creadentials");
             }
 
-            return APIResponses<string>.SuccessResponse("Login Successful");    
+            return APIResponses<string>.SuccessResponse(await jWTTokenService.CreateToken(isexists));    
         }
 
         public async Task<APIResponses<GetUserDto>> RegisterAsync(UserRegisterDto userRegister)

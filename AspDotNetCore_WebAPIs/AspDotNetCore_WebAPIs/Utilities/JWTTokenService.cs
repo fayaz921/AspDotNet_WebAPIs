@@ -23,7 +23,7 @@ namespace AspDotNetCore_WebAPIs.Utilities
 
             var tokenkey =  _configuration.GetSection("Token").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenkey!)); //! null-forgiving operator
-            var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha512);
+            var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

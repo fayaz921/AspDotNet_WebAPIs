@@ -12,7 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 //Add Db and Repo
 builder.Services.AddRepoConfigration(builder.Configuration);
 // Add services to the container.
-builder.Services.AddServiceConfigration();
+builder.Services.AddServiceConfigration()
+                .AddSwaggerCongigration();
 builder.Services.AddControllers();
 
 

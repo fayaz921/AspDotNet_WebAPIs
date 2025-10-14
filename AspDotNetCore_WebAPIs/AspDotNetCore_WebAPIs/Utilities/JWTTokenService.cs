@@ -24,9 +24,13 @@ namespace AspDotNetCore_WebAPIs.Utilities
             var tokenkey =  _configuration.GetSection("Token").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenkey!)); //! null-forgiving operator
             var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature);
+            var issuer = _configuration.GetSection("IssuerKey").Value;
+            var audience = _configuration.GetSection("AudienceKey").Value;
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                Issuer = issuer,
+                Audience = audience,
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds,

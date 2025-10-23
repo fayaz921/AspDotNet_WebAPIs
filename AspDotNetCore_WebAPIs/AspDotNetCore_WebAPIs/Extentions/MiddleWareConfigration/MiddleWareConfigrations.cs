@@ -1,4 +1,6 @@
-﻿namespace AspDotNetCore_WebAPIs.Extentions.MiddleWareConfigration
+﻿using AspDotNetCore_WebAPIs.MiddleWare;
+
+namespace AspDotNetCore_WebAPIs.Extentions.MiddleWareConfigration
 {
     public static class MiddleWareConfigrations
     {
@@ -10,9 +12,9 @@
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
+            app.UseMiddleware<GlobalExceptionHandlingMiddleWare>()
+               .UseHttpsRedirection()
+               .UseAuthorization();
 
             app.MapControllers();
             return app;

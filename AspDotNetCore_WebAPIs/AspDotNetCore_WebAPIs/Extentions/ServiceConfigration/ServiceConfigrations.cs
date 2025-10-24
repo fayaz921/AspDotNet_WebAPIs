@@ -1,6 +1,9 @@
-﻿using AspDotNetCore_WebAPIs.Services.Implementation;
+﻿using AspDotNetCore_WebAPIs.Dtos.Authentication;
+using AspDotNetCore_WebAPIs.Services.Implementation;
 using AspDotNetCore_WebAPIs.Services.Interfaces;
 using AspDotNetCore_WebAPIs.Utilities;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -60,7 +63,13 @@ namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
         }
 
 
-
+        //Fluent Validation
+        public static IServiceCollection AddFluentValidationConfigration(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<UserRegisterDto>();
+            services.AddFluentValidationAutoValidation();
+            return services;
+        }
 
     }
 }

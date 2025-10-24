@@ -19,7 +19,11 @@ namespace AspDotNetCore_WebAPIs.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
-           var response = await authenticationService.RegisterAsync(userRegisterDto);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var response = await authenticationService.RegisterAsync(userRegisterDto);
             if(response == null)
             {
                 return Conflict("Registration failed");

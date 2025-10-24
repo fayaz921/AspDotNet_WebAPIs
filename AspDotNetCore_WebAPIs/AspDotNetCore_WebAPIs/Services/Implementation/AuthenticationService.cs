@@ -13,10 +13,12 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
     {
         private readonly IAuthenticationRepo authenticationRepo;
         private readonly IJWTTokenService jWTTokenService;
-        public AuthenticationService(IAuthenticationRepo repo, IJWTTokenService jWTToken)
+        private readonly IPasswordEncryptor passwordEncryptor;
+        public AuthenticationService(IAuthenticationRepo repo, IJWTTokenService jWTToken, IPasswordEncryptor _passwordEncryptor)
         {
             authenticationRepo = repo;
             jWTTokenService = jWTToken;
+            passwordEncryptor = _passwordEncryptor;
         }
 
         public async Task<APIResponses<string>> LoginAsync(UserLoginDto userLogin)
@@ -27,7 +29,7 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
             {
                 return APIResponses<string>.FailureResponse("Invalid login credentials");
             }
-            if(!PasswordEncryptor.VerifyPasswordhashandsalt(userLogin.Password,isexists.PasswordHash,isexists.PasswordSalt))
+            if(!passwordEncryptor.VerifyPasswordhashandsalt(userLogin.Password,isexists.PasswordHash,isexists.PasswordSalt))
             {
                 return APIResponses<string>.FailureResponse("Invalid login creadentials");
             }
@@ -38,7 +40,7 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
         public async Task<APIResponses<GetUserDto>> RegisterAsync(UserRegisterDto userRegister)
         {
             //Map from dto to user
-            var user = userRegister.Map();
+            var user = userRegister.Map(passwordEncryptor);
 
             //user check if it exists or not 
             var usercheck = await authenticationRepo.UserCheckAsync(user);

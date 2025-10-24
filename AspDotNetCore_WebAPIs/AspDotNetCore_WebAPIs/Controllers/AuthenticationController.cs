@@ -1,4 +1,5 @@
 ﻿using AspDotNetCore_WebAPIs.Dtos.Authentication;
+using AspDotNetCore_WebAPIs.Filters;
 using AspDotNetCore_WebAPIs.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace AspDotNetCore_WebAPIs.Controllers
     [ApiController]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ValidateModelState]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService authenticationService;
@@ -18,11 +20,7 @@ namespace AspDotNetCore_WebAPIs.Controllers
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        {           
             var response = await authenticationService.RegisterAsync(userRegisterDto);
             if(response == null)
             {

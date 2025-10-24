@@ -1,6 +1,7 @@
 ﻿using AspDotNetCore_WebAPIs.Dtos.Authentication;
 using AspDotNetCore_WebAPIs.Services.Implementation;
 using AspDotNetCore_WebAPIs.Services.Interfaces;
+using AspDotNetCore_WebAPIs.Shared;
 using AspDotNetCore_WebAPIs.Utilities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -18,7 +19,8 @@ namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
                                                 => services.AddScoped<IUserService, UserService>()
                                                            .AddEndpointsApiExplorer()
                                                            .AddScoped<IAuthenticationService, AuthenticationService>()
-                                                           .AddScoped<IJWTTokenService, JWTTokenService>();
+                                                           .AddScoped<IJWTTokenService, JWTTokenService>()
+                                                           .AddScoped<IPasswordEncryptor,PasswordEncryptor>();
 
 
         //Swagger Configuration

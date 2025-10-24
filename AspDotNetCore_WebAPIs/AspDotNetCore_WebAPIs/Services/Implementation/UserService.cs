@@ -10,14 +10,16 @@ namespace AspDotNetCore_WebAPIs.Services.Implementation
     public class UserService : IUserService
     {
         private readonly IUserRepo userRepo;
-        public UserService(IUserRepo _userrepo)
+        private readonly IPasswordEncryptor passwordEncryptor;
+        public UserService(IUserRepo _userrepo, IPasswordEncryptor _passwordEncryptor)
         {
             userRepo = _userrepo;
+            passwordEncryptor = _passwordEncryptor;
         }
         public async Task<GetUserDto> RegisterAsync(UserRegisterDto userRegisterDto)
         {
-            var user = userRegisterDto.Map();
-            PasswordEncryptor.CreatePasswordHashandSalt(userRegisterDto.Password, out byte[] hash, out byte[] salt);
+            var user = userRegisterDto.Map(passwordEncryptor);
+            passwordEncryptor.CreatePasswordHashandSalt(userRegisterDto.Password, out byte[] hash, out byte[] salt);
             user.PasswordHash = hash;
             user.PasswordSalt = salt;
             if (user == null) 

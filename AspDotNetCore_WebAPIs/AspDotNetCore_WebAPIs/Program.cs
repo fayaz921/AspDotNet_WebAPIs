@@ -1,6 +1,7 @@
 using AspDotNetCore_WebAPIs.Extentions.MiddleWareConfigration;
 using AspDotNetCore_WebAPIs.Extentions.RepoConfigration;
 using AspDotNetCore_WebAPIs.Extentions.ServiceConfigration;
+using AspDotNetCore_WebAPIs.Filters;
 using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ builder.Services.AddServiceConfigration()
                 .AddFluentValidationAutoValidation();
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<ValidateModelState>());
 
 
 var app = builder.Build();

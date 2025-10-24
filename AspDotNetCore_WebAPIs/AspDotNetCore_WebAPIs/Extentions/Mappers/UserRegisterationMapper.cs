@@ -6,9 +6,9 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
 {
     public static class UserRegisterationMapper
     {
-        public static User Map(this UserRegisterDto dto)
+        public static User Map(this UserRegisterDto dto,IPasswordEncryptor passwordEncryptor)
         {
-            PasswordEncryptor.CreatePasswordHashandSalt(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            passwordEncryptor.CreatePasswordHashandSalt(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
             return new User
             {
                 UserId = Guid.NewGuid(),

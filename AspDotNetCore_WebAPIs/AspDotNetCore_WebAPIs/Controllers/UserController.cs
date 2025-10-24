@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspDotNetCore_WebAPIs.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace AspDotNetCore_WebAPIs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ValidateModelState]
     public class UserController : ControllerBase
     {
         [HttpGet("Getuser")]

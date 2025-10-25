@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add Db and Repo
+
 builder.Services.AddRepoConfigration(builder.Configuration);
 // Add services to the container.
 builder.Services.AddServiceConfigration()
@@ -14,8 +15,10 @@ builder.Services.AddServiceConfigration()
                 .AddFluentValidationAutoValidation();
 
 
+
 builder.Services.AddControllers(options => options.Filters.Add<ValidateModelState>());
 
+builder.Host.AddSerilog(builder.Configuration);
 
 var app = builder.Build();
 

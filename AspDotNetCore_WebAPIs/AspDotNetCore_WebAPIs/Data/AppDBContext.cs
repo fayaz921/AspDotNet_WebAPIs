@@ -24,7 +24,7 @@ namespace AspDotNetCore_WebAPIs.Data
 
                 new User()
                 {
-                    UserId = Guid.Parse("256de607-fe80-4297-b54a-056f620baf86"),
+                    UserId = Guid.Parse("f98aafcb-2614-48fe-9094-a8d088154464"),
                     FirstName = "Fayaz",
                     LastName = "Khan",
                     Email = "fayaz573@gmail.com",
@@ -38,7 +38,7 @@ namespace AspDotNetCore_WebAPIs.Data
                 },
                 new User
                 {
-                    UserId = Guid.Parse("a5dd970a-8e4b-49ac-87b9-34967ad9d79c"),
+                    UserId = Guid.Parse("0312c103-0e89-448c-b299-1b8aca5f4d70"),
                     FirstName = "Fayaz",
                     LastName = "Ahmad",
                     Email = "fayaz129@gmail.com",

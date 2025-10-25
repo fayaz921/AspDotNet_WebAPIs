@@ -8,6 +8,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
@@ -71,6 +72,13 @@ namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
             services.AddValidatorsFromAssemblyContaining<UserRegisterDto>();
             services.AddFluentValidationAutoValidation();
             return services;
+        }
+
+        //Serilog configuration
+        public static IHostBuilder AddSerilog(this IHostBuilder hostBuilder, IConfiguration configuration)
+        {
+            Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+            return hostBuilder.UseSerilog();
         }
 
     }

@@ -18,7 +18,7 @@ namespace AspDotNetCore_WebAPIs.Utilities
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Role,user.Role),
+                new Claim(ClaimTypes.Role,user.Role.ToString()),
             };
 
             var tokenkey =  _configuration.GetSection("Token").Value;

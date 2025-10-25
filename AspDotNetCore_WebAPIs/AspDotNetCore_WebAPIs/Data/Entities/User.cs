@@ -1,4 +1,7 @@
-﻿namespace AspDotNetCore_WebAPIs.Data.Entities
+﻿using AspDotNetCore_WebAPIs.Data.Enums;
+using AspDotNetCore_WebAPIs.Shared;
+
+namespace AspDotNetCore_WebAPIs.Data.Entities
 {
     public class User
     {
@@ -15,7 +18,7 @@
 
         public byte[] PasswordSalt { get; set; } = Array.Empty<byte>();
 
-        public string Role { get; set; } = string.Empty;
+        public Role Role { get; set; } = Role.User;
 
         public string? ImageUrl { get; set; }
 

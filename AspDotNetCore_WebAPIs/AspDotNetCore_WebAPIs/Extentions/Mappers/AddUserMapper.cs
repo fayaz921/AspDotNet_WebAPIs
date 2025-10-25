@@ -1,4 +1,5 @@
 ﻿using AspDotNetCore_WebAPIs.Data.Entities;
+using AspDotNetCore_WebAPIs.Data.Enums;
 using AspDotNetCore_WebAPIs.Dtos.Users;
 
 namespace AspDotNetCore_WebAPIs.Extentions.Mappers
@@ -15,7 +16,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.Mappers
                 Email = dto.Email,
                 ImageUrl = dto.ImageUrl,
                 Contact = dto.Contact,
-                Role = dto.Role,
+                Role = Role.User,
 
             };
         }

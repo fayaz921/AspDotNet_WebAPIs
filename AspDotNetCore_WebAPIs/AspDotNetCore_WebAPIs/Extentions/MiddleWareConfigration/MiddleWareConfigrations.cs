@@ -1,4 +1,5 @@
 ﻿using AspDotNetCore_WebAPIs.MiddleWare;
+using Serilog;
 
 namespace AspDotNetCore_WebAPIs.Extentions.MiddleWareConfigration
 {
@@ -15,7 +16,7 @@ namespace AspDotNetCore_WebAPIs.Extentions.MiddleWareConfigration
             app.UseMiddleware<GlobalExceptionHandlingMiddleWare>()
                .UseHttpsRedirection()
                .UseAuthorization();
-
+            app.UseSerilogRequestLogging();
             app.MapControllers();
             return app;
         }

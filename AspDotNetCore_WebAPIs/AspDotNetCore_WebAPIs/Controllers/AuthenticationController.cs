@@ -14,13 +14,16 @@ namespace AspDotNetCore_WebAPIs.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService authenticationService;
-        public AuthenticationController(IAuthenticationService _authenticationService)
+        private readonly ILogger logger;
+        public AuthenticationController(IAuthenticationService _authenticationService, ILogger<AuthenticationController> _logger)
         {
             authenticationService = _authenticationService;
+            logger = _logger;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
-        {           
+        {
+            logger.LogInformation("User Registration start");
             var response = await authenticationService.RegisterAsync(userRegisterDto);
             if(response == null)
             {

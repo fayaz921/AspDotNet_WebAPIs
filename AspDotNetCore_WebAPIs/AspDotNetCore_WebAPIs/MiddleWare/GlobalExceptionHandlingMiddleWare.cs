@@ -3,6 +3,14 @@ using System.Net;
 
 namespace AspDotNetCore_WebAPIs.MiddleWare
 {
+
+    //Trace
+    //Debug
+    //Information
+    //Warning
+    //Error
+    //Critical
+
     public class GlobalExceptionHandlingMiddleWare(RequestDelegate next)
     {
         private readonly RequestDelegate _next = next;

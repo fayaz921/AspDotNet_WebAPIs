@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 
 namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
 {
@@ -42,7 +43,14 @@ namespace AspDotNetCore_WebAPIs.Extentions.ServiceConfigration
                     Type = SecuritySchemeType.ApiKey,
                 });
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
-            });
+
+                // Include XML comments for documentation (if available)
+                var assembly = Assembly.GetExecutingAssembly();
+                var xmlFile = $"{assembly.GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+            
+    });
 
         //JWT Authentication
         public static IServiceCollection AddAuthentions(this IServiceCollection services, IConfiguration configuration)
